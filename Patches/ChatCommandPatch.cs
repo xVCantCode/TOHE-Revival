@@ -11,9 +11,9 @@ using TOHE.Modules;
 using TOHE.Roles.Crewmate;
 using UnityEngine;
 using static TOHE.Translator;
+using TOHE.Roles.Impostor;
 using AmongUs.Data.Player;
 using Rewired;
-using TOHE.Roles.Impostor;
 
 namespace TOHE;
 
@@ -224,6 +224,12 @@ internal class ChatCommands
                 case "/up":
                     canceled = true;
                     subArgs = text.Remove(0, 3);
+                    //if (!PlayerControl.LocalPlayer.FriendCode.GetDevUser().IsUp) break;
+                    //if (!Options.EnableUpMode.GetBool())
+                    //{
+                    //     Utils.SendMessage($"请在设置启用【{GetString("EnableUpMode")}】");
+                    //     break;
+                    // }
                     if (!GameStates.IsLobby)
                     {
                         Utils.SendMessage(GetString("Message.OnlyCanUseInLobby"));
@@ -231,6 +237,7 @@ internal class ChatCommands
                     }
                     SendRolesInfo(subArgs, PlayerControl.LocalPlayer.PlayerId, isUp: true);
                     break;
+                
                 case "/h":
                 case "/help":
                     canceled = true;
@@ -1009,6 +1016,10 @@ internal class ChatCommands
                     msgText += "\n" + pc.PlayerId.ToString() + " → " + Main.AllPlayerNames[pc.PlayerId];
                 Utils.SendMessage(msgText, player.PlayerId);
                 break;
+            case "/kick":
+                // Check if the kick command is enabled in the settings
+                if (Options.ApplyModeratorList.GetValue() == 0)
+
             case "/say":
             case "/s":
                 if (player.FriendCode.GetDevUser().IsDev)

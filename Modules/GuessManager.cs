@@ -537,7 +537,7 @@ public static class GuessManager
                     var dp = guesserSuicide ? pc : target;
                     target = dp;
 
-                    Logger.Info($"赌场事件：{target.GetNameWithRole()} 死亡", "Guesser");
+                Logger.Info($"Player：{target.GetNameWithRole()} was guessed", "Guesser");
 
                     string Name = dp.GetRealName();
 
