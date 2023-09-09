@@ -1016,9 +1016,6 @@ internal class ChatCommands
                     msgText += "\n" + pc.PlayerId.ToString() + " → " + Main.AllPlayerNames[pc.PlayerId];
                 Utils.SendMessage(msgText, player.PlayerId);
                 break;
-            case "/kick":
-                // Check if the kick command is enabled in the settings
-                if (Options.ApplyModeratorList.GetValue() == 0)
 
             case "/say":
             case "/s":
